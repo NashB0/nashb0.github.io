@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ignacio Benito &mdash; QA and application quality control</title>
+<meta name="description" content="QA Manual Tester and functional analyst. I review, organize, document and maintain applications and websites for organizations and institutions. External provider, remote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0d1424;
+    --navy-deep:#090e1a;
+    --navy-panel:#111a30;
+    --gold:#c9a24b;
+    --gold-soft:#d9bd77;
+    --paper:#f6f7f9;
+    --paper-line:#e4e7ec;
+    --ink:#2b3240;
+    --ink-soft:#55606f;
+    --cloud:#aeb7c9;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--navy);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:'Newsreader',Georgia,'Times New Roman',serif}
+  h1,h2,h3{font-family:'Newsreader',Georgia,serif;font-weight:600;line-height:1.12;letter-spacing:-.01em}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .kicker{
+    font-size:12px;letter-spacing:3.5px;text-transform:uppercase;
+    color:var(--gold);font-weight:600;font-family:'Inter',sans-serif;
+    display:inline-block;margin-bottom:18px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;
+    background:rgba(13,20,36,0);
+    transition:background .35s ease, padding .35s ease, box-shadow .35s ease;
+  }
+  nav.scrolled{background:rgba(9,14,26,.92);backdrop-filter:blur(10px);padding:12px 28px;box-shadow:0 1px 0 rgba(201,162,75,.18)}
+  nav .brand{font-family:'Newsreader',serif;font-size:19px;color:#fff;font-weight:600;letter-spacing:.2px}
+  nav .brand span{color:var(--gold)}
+  nav .nav-cta{
+    font-size:14px;color:var(--navy);background:var(--gold);
+    padding:9px 18px;border-radius:999px;text-decoration:none;font-weight:600;
+    transition:transform .2s ease, background .2s ease;
+  }
+  nav .nav-cta:hover{transform:translateY(-1px);background:var(--gold-soft)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;align-items:center;
+    background:
+      radial-gradient(1200px 600px at 75% 10%, rgba(201,162,75,.10), transparent 60%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    overflow:hidden;
+  }
+  .hero .frame{
+    position:absolute;inset:22px;border:1px solid rgba(201,162,75,.28);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:2;padding:120px 0 90px}
+  .hero h1{
+    color:#fff;font-size:clamp(26px,3.5vw,40px);
+    max-width:none;margin:6px 0 0;
+  }
+  .hero h1 br{display:inline}
+  .hero h1 em{font-style:italic;color:var(--gold-soft);font-weight:500}
+  .hero .rule{width:88px;height:2px;background:var(--gold);margin:30px 0 26px}
+  .hero p.sub{
+    color:var(--cloud);font-size:clamp(16px,2vw,19px);max-width:56ch;
+  }
+  .hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+  .btn-gold{
+    background:var(--gold);color:var(--navy);text-decoration:none;
+    padding:14px 26px;border-radius:999px;font-weight:600;font-size:15px;
+    display:inline-flex;align-items:center;gap:9px;
+    transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
+    box-shadow:0 8px 24px rgba(201,162,75,.18);
+  }
+  .btn-gold:hover{transform:translateY(-2px);background:var(--gold-soft);box-shadow:0 12px 30px rgba(201,162,75,.28)}
+  .btn-ghost{
+    border:1px solid rgba(255,255,255,.28);color:#fff;text-decoration:none;
+    padding:14px 26px;border-radius:999px;font-weight:500;font-size:15px;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--gold);background:rgba(201,162,75,.08)}
+  .hero .tags{margin-top:52px;display:flex;gap:26px;flex-wrap:wrap;color:var(--cloud);font-size:13.5px}
+  .hero .tags span{display:flex;align-items:center;gap:8px}
+  .hero .tags i{width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;transform:rotate(45deg);border-radius:1px}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:96px 0}
+  .light{background:var(--paper);color:var(--ink)}
+  .dark{background:var(--navy);color:#fff}
+  .dark .kicker{color:var(--gold-soft)}
+  .sec-head{max-width:60ch;margin-bottom:44px}
+  .sec-head h2{font-size:clamp(28px,4vw,40px);color:inherit}
+  .light .sec-head h2{color:var(--navy)}
+  .sec-head .lead{margin-top:16px;font-size:clamp(16px,1.8vw,18px);color:var(--ink-soft)}
+  .dark .sec-head .lead{color:var(--cloud)}
+
+  /* who am i */
+  .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .trait{
+    background:#fff;border:1px solid var(--paper-line);border-radius:14px;
+    padding:26px 24px;transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .trait:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(13,20,36,.08)}
+  .trait .mk{
+    width:42px;height:42px;border:1px solid var(--gold);border-radius:10px;
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+    color:var(--gold);font-family:'Newsreader',serif;font-size:20px;font-weight:600;
+  }
+  .trait h3{font-size:19px;color:var(--navy);margin-bottom:7px}
+  .trait p{font-size:14.5px;color:var(--ink-soft)}
+
+  /* what i do — benefits */
+  .do-lead{max-width:64ch;font-size:18px;color:#eef1f6;margin-bottom:14px}
+  .do-lead strong{color:#fff}
+  .do-sub{max-width:64ch;color:var(--cloud);margin-bottom:40px}
+  .benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .benefit{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--navy-panel);border:1px solid rgba(201,162,75,.14);
+    border-radius:14px;padding:22px 22px;
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .benefit:hover{border-color:rgba(201,162,75,.4);transform:translateY(-3px)}
+  .benefit .dot{flex:0 0 auto;width:38px;height:38px;border-radius:50%;
+    background:rgba(201,162,75,.12);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px}
+  .benefit h3{font-size:16.5px;color:#fff;margin-bottom:3px;font-family:'Inter';font-weight:700}
+  .benefit p{font-size:14px;color:var(--cloud)}
+
+  /* problems */
+  .prob-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 40px}
+  .prob{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--paper-line)}
+  .prob .x{flex:0 0 auto;width:30px;height:30px;border-radius:8px;background:#fff;border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:700;font-size:15px}
+  .prob h3{font-size:16px;color:var(--navy);font-family:'Inter';font-weight:600;margin-bottom:2px}
+  .prob p{font-size:13.5px;color:var(--ink-soft)}
+  .promise{
+    margin-top:44px;background:var(--navy);border-radius:16px;padding:40px 40px;
+    position:relative;overflow:hidden;
+  }
+  .promise::after{content:"";position:absolute;top:0;right:0;width:180px;height:180px;
+    background:radial-gradient(circle at 70% 30%, rgba(201,162,75,.18), transparent 70%)}
+  .promise h3{color:#fff;font-size:24px;margin-bottom:10px;position:relative}
+  .promise p{color:var(--cloud);font-size:16px;max-width:60ch;position:relative}
+  .promise b{color:var(--gold-soft);font-weight:600}
+
+  /* experience */
+  .exp-lead{max-width:66ch;font-size:17px;color:var(--ink);margin-bottom:36px}
+  .exp-lead strong{color:#fff}
+  .exp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:26px}
+  .exp{background:#fff;border:1px solid var(--paper-line);border-radius:14px;padding:26px 22px;
+    transition:transform .25s ease, box-shadow .25s ease}
+  .exp:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(13,20,36,.08)}
+  .exp .mk{width:44px;height:44px;border-radius:10px;background:var(--paper);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--gold);font-size:20px}
+  .exp h3{font-size:17px;color:var(--navy);margin-bottom:6px}
+  .exp p{font-size:14px;color:var(--ink-soft)}
+  .exp-note{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--gold);
+    border-radius:14px;padding:22px 24px}
+  .exp-note .mk{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--paper);
+    border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px}
+  .exp-note p{font-size:14.5px;color:var(--ink)}
+  .exp-note b{color:#fff}
+
+  /* method — real sequence, numbered */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step{background:var(--navy-panel);border:1px solid rgba(201,162,75,.14);border-radius:14px;
+    padding:24px 22px;position:relative;transition:border-color .25s ease, transform .25s ease}
+  .step:hover{border-color:rgba(201,162,75,.4);transform:translateY(-3px)}
+  .step .n{position:absolute;top:18px;right:22px;font-family:'Newsreader',serif;font-size:34px;
+    color:rgba(201,162,75,.35);font-weight:600;line-height:1}
+  .step .mk{width:40px;height:40px;border-radius:50%;background:rgba(201,162,75,.12);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:17px;margin-bottom:16px}
+  .step h3{font-size:17px;color:#fff;margin-bottom:6px;font-family:'Inter';font-weight:700}
+  .step p{font-size:13.5px;color:var(--cloud)}
+
+  /* services */
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .svc{background:#fff;border:1px solid var(--paper-line);border-radius:16px;padding:30px 28px;
+    transition:transform .25s ease, box-shadow .25s ease;position:relative;overflow:hidden}
+  .svc:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(13,20,36,.10)}
+  .svc .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .svc .mk{width:46px;height:46px;border-radius:12px;background:var(--paper);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:21px}
+  .svc .num{font-family:'Newsreader',serif;font-size:30px;color:#d8d2c0;font-weight:600}
+  .svc h3{font-size:20px;color:var(--navy);margin:10px 0 4px}
+  .svc .forwho{font-size:13.5px;color:var(--gold);font-style:italic;margin-bottom:12px;font-family:'Newsreader',serif}
+  .svc p.d{font-size:14.5px;color:var(--ink-soft);margin-bottom:14px}
+  .svc ul{list-style:none;margin-bottom:14px}
+  .svc ul li{font-size:13.5px;color:var(--ink-soft);padding-left:18px;position:relative;margin-bottom:6px}
+  .svc ul li::before{content:"–";position:absolute;left:0;color:var(--gold);font-weight:700}
+  .svc .benefit-line{font-size:13.5px;color:var(--navy);font-style:italic;border-top:1px solid var(--paper-line);padding-top:12px;font-family:'Newsreader',serif}
+  .svc.feature{background:var(--navy);border-color:transparent}
+  .svc.feature .mk{background:var(--navy-panel)}
+  .svc.feature .num{display:none}
+  .svc.feature h3{color:#fff}
+  .svc.feature .forwho{color:var(--gold-soft)}
+  .svc.feature p.d,.svc.feature ul li{color:var(--cloud)}
+  .svc.feature ul li::before{color:var(--gold-soft)}
+  .svc.feature .benefit-line{color:var(--gold-soft);border-top-color:rgba(255,255,255,.14)}
+  .svc.feature .badge{position:absolute;top:22px;right:0;background:var(--gold);color:var(--navy);
+    font-size:11px;font-weight:700;letter-spacing:.5px;padding:5px 14px 5px 12px;border-radius:999px 0 0 999px}
+
+  /* next steps */
+  .next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px}
+  .next{background:var(--navy-panel);border:1px solid rgba(201,162,75,.14);border-radius:14px;padding:26px 24px;position:relative}
+  .next .n{position:absolute;top:20px;right:24px;font-family:'Newsreader',serif;font-size:32px;color:rgba(201,162,75,.35);font-weight:600}
+  .next .mk{width:44px;height:44px;border-radius:50%;background:rgba(201,162,75,.12);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px;margin-bottom:16px}
+  .next h3{font-size:18px;color:#fff;margin-bottom:6px;font-family:'Inter';font-weight:700}
+  .next p{font-size:14px;color:var(--cloud)}
+  .next-note{text-align:center;color:var(--cloud);font-size:17px;max-width:60ch;margin:0 auto}
+  .next-note b{color:var(--gold);font-weight:700}
+
+  /* contact / footer */
+  .contact{background:linear-gradient(180deg,var(--navy) 0%, var(--navy-deep) 100%);text-align:center;padding:110px 0 90px}
+  .contact .kicker{color:var(--gold-soft)}
+  .contact h2{color:#fff;font-size:clamp(30px,5vw,50px);margin-bottom:14px}
+  .contact p{color:var(--cloud);font-size:17px;max-width:52ch;margin:0 auto 34px}
+  .contact .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .contact .meta{margin-top:46px;color:#7b869a;font-size:13px;display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
+  footer{background:var(--navy-deep);padding:26px 0;text-align:center;color:#66718a;font-size:12.5px;border-top:1px solid rgba(201,162,75,.14)}
+  footer b{color:#aeb7c9;font-weight:600}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:820px){
+    .who-grid,.benefits,.prob-grid,.exp-cards,.steps,.svc-grid,.next-grid{grid-template-columns:1fr}
+    section{padding:70px 0}
+    .hero-inner{padding:110px 0 70px}
+    .promise{padding:30px 26px}
+    nav .brand{font-size:17px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* language toggle */
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .lang{display:inline-flex;border:1px solid rgba(201,162,75,.45);border-radius:999px;overflow:hidden}
+  .lang-btn{background:transparent;color:#cfd6e2;border:none;padding:6px 12px;font:600 12.5px 'Inter',sans-serif;cursor:pointer;letter-spacing:.5px;transition:background .2s ease,color .2s ease}
+  .lang-btn:hover{color:#fff}
+  .lang-btn.active{background:var(--gold);color:var(--navy)}
+  @media(max-width:820px){.lang-btn{padding:6px 9px;font-size:11.5px}.nav-right{gap:8px}.nav .nav-cta{padding:8px 14px;font-size:13px}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand">Ignacio <span>Benito</span></div>
+  <div class="nav-right">
+    <div class="lang" role="group" aria-label="Language / Idioma">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button>
+    </div>
+    <a class="nav-cta" href="https://wa.me/5492995523818" target="_blank" rel="noopener" data-i18n="nav_cta">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="frame"></div>
+  <div class="wrap hero-inner reveal">
+    <span class="kicker" data-i18n="hero_kicker">QA &middot; Functional Analysis &middot; Maintenance</span>
+    <h1 class="serif" data-i18n="hero_title">Make sure your digital tools<br><em>finally have someone accountable.</em></h1>
+    <div class="rule"></div>
+    <p class="sub" data-i18n="hero_sub">I review, organize, document and maintain web applications and websites for organizations and institutions. I catch what&rsquo;s broken before your users do, and I take ownership of keeping everything running over time.</p>
+    <div class="actions">
+      <a class="btn-gold" href="https://wa.me/5492995523818" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4zM12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2z"/></svg><span data-i18n="hero_btn_wa">Message me on WhatsApp</span></a>
+      <a class="btn-ghost" href="#servicios" data-i18n="hero_btn_svc">See services</a>
+    </div>
+    <div class="tags">
+      <span><i></i> <span data-i18n="hero_tag1">External provider</span></span>
+      <span><i></i> <span data-i18n="hero_tag2">Remote</span></span>
+      <span><i></i> <span data-i18n="hero_tag3">In QA since 2022</span></span>
+    </div>
+  </div>
+</header>
+
+<section class="light" id="quien-soy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-i18n="who_kicker">Who I am</span>
+      <h2 class="serif" data-i18n="who_title">A functional profile, not just a technical one</h2>
+      <p class="lead" data-i18n="who_lead">I&rsquo;m a QA Manual Tester and functional analyst. Since 2022 I&rsquo;ve reviewed, documented and validated management platforms for software companies in Spain.</p>
+    </div>
+    <div class="who-grid">
+      <div class="trait reveal"><div class="mk">&#10003;</div><h3 data-i18n="who_1_h">I look at tools from the real user&rsquo;s side</h3><p data-i18n="who_1_p">I spot what doesn&rsquo;t work, where time is lost or where errors slip in, before it reaches the people using it.</p></div>
+      <div class="trait reveal"><div class="mk">&#9670;</div><h3 data-i18n="who_2_h">I know processes from the inside</h3><p data-i18n="who_2_p">I&rsquo;ve worked on systems for task management, staff and contractor control, accreditations, approvals and tracking. I understand how an organization runs behind the scenes.</p></div>
+      <div class="trait reveal"><div class="mk">&#8623;</div><h3 data-i18n="who_3_h">I document in plain language</h3><p data-i18n="who_3_p">I put everything in writing so anyone can follow it, with no jargon and no reliance on one person&rsquo;s memory.</p></div>
+      <div class="trait reveal"><div class="mk">&#9226;</div><h3 data-i18n="who_4_h">I handle sensitive information</h3><p data-i18n="who_4_p">Discretion and order are part of how I approach every project. Trust is protected from day one.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="que-hago">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-i18n="do_kicker">What I do</span>
+      <h2 class="serif" data-i18n="do_title">I organize and automate what wastes your time</h2>
+    </div>
+    <p class="do-lead reveal" data-i18n="do_lead"><strong>I help organize and automate the processes</strong> that waste time, invite errors, or rely on a single person remembering to do them.</p>
+    <p class="do-sub reveal" data-i18n="do_sub">I don&rsquo;t show up with a finished solution: first I get a clear picture of how things work today, then I propose, test and support. I&rsquo;m the bridge between what the organization needs and the solution that delivers it. You always deal with me.</p>
+    <div class="benefits">
+      <div class="benefit reveal"><div class="dot">&#10003;</div><div><h3 data-i18n="do_1_h">Tools that work</h3><p data-i18n="do_1_p">with someone accountable when something fails.</p></div></div>
+      <div class="benefit reveal"><div class="dot">&#9636;</div><div><h3 data-i18n="do_2_h">Clear processes</h3><p data-i18n="do_2_p">documented and easy for anyone on the team to follow.</p></div></div>
+      <div class="benefit reveal"><div class="dot">&#8635;</div><div><h3 data-i18n="do_3_h">Less time lost, fewer errors</h3><p data-i18n="do_3_p">in day-to-day repetitive tasks.</p></div></div>
+      <div class="benefit reveal"><div class="dot">&#9786;</div><div><h3 data-i18n="do_4_h">A single point of contact</h3><p data-i18n="do_4_p">for the entire technical side, start to finish.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="problemas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-i18n="prob_kicker">What I solve</span>
+      <h2 class="serif" data-i18n="prob_title">The problems I help solve</h2>
+      <p class="lead" data-i18n="prob_lead">Many organizations have applications and a website up and running, but no one making sure they actually work well. Over time, that adds up:</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob reveal"><div class="x">!</div><div><h3 data-i18n="prob_1_h">Tools with no oversight or owner</h3><p data-i18n="prob_1_p">No one knows for certain who manages them or who responds when something fails.</p></div></div><div class="prob reveal"><div class="x">!</div><div><h3 data-i18n="prob_2_h">Errors no one catches in time</h3><p data-i18n="prob_2_p">Found only when a user complains. By then, the damage is done.</p></div></div><div class="prob reveal"><div class="x">!</div><div><h3 data-i18n="prob_3_h">No support when a problem comes up</h3><p data-i18n="prob_3_p">There&rsquo;s no one to turn to, or the answer arrives late and rushed.</p></div></div><div class="prob reveal"><div class="x">!</div><div><h3 data-i18n="prob_4_h">Undocumented processes and tools</h3><p data-i18n="prob_4_p">Using the tool depends on someone remembering how it&rsquo;s done.</p></div></div><div class="prob reveal"><div class="x">!</div><div><h3 data-i18n="prob_5_h">Dependence on a single person</h3><p data-i18n="prob_5_p">All the knowledge lives in one head. The day they&rsquo;re out, the organization is exposed.</p></div></div><div class="prob reveal"><div class="x">!</div><div><h3 data-i18n="prob_6_h">Repetitive tasks that eat up time</h3><p data-i18n="prob_6_p">Manual entries and checks that repeat and could be simplified.</p></div></div>
+    </div>
+    <div class="promise reveal">
+      <h3 class="serif" data-i18n="promise_h">My job is to take ownership so this stops happening.</h3>
+      <p data-i18n="promise_p">Your tools get an <b>owner</b>, work properly, stay <b>documented</b>, and have <b>support</b> when it&rsquo;s needed.</p>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="experiencia" style="background:var(--navy-deep)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-i18n="exp_kicker">Experience</span>
+      <h2 class="serif" data-i18n="exp_title">The experience I bring</h2>
+    </div>
+    <p class="exp-lead reveal" style="color:#eef1f6" data-i18n="exp_lead"><strong>Since 2022, QA Manual Tester for software companies in Spain.</strong> I review their platforms before they reach the user: I catch errors, confirm that things work, and document how they&rsquo;re used. I&rsquo;ve worked on demanding systems, where a mistake carries real weight.</p>
+    <div class="exp-cards">
+      <div class="exp reveal" style="background:var(--navy-panel);border-color:rgba(201,162,75,.14)"><div class="mk">&#8981;</div><h3 data-i18n="exp_1_h" style="color:#fff">An eye for what fails</h3><p data-i18n="exp_1_p" style="color:var(--cloud)">before the end user ever has to deal with it.</p></div>
+      <div class="exp reveal" style="background:var(--navy-panel);border-color:rgba(201,162,75,.14)"><div class="mk">&#9636;</div><h3 data-i18n="exp_2_h" style="color:#fff">A method for documenting</h3><p data-i18n="exp_2_p" style="color:var(--cloud)">in a way anyone can understand, without jargon.</p></div>
+      <div class="exp reveal" style="background:var(--navy-panel);border-color:rgba(201,162,75,.14)"><div class="mk">&#9226;</div><h3 data-i18n="exp_3_h" style="color:#fff">Judgment with sensitive data</h3><p data-i18n="exp_3_p" style="color:var(--cloud)">with the discretion each case calls for.</p></div>
+    </div>
+    <div class="exp-note reveal" style="background:var(--navy-panel);border-color:var(--gold)">
+      <div class="mk" style="background:rgba(201,162,75,.12)">&#10022;</div>
+      <p style="color:#eef1f6" data-i18n="exp_note"><b>On top of that:</b> I built and tested my own web application for management. I know the whole journey firsthand, from understanding a need to turning it into a tool that works.</p>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="metodologia">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-i18n="method_kicker">Methodology</span>
+      <h2 class="serif" data-i18n="method_title">How I work</h2>
+      <p class="lead" data-i18n="method_lead">A simple, orderly method, so you always know what we&rsquo;re doing at each stage and why. I don&rsquo;t start proposing solutions before I&rsquo;ve grasped the problem.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="n">1</span><div class="mk">&#8981;</div><h3 data-i18n="m1_h">I assess and understand</h3><p data-i18n="m1_p">What&rsquo;s there today, what state it&rsquo;s in, who uses it and where the problems show up.</p></div>
+      <div class="step reveal"><span class="n">2</span><div class="mk">&#9636;</div><h3 data-i18n="m2_h">I document</h3><p data-i18n="m2_p">In plain language: how each thing works and what I found.</p></div>
+      <div class="step reveal"><span class="n">3</span><div class="mk">&#10022;</div><h3 data-i18n="m3_h">I propose improvements</h3><p data-i18n="m3_p">Starting with what has the most impact and the least effort.</p></div>
+      <div class="step reveal"><span class="n">4</span><div class="mk">&#8644;</div><h3 data-i18n="m4_h">I coordinate development</h3><p data-i18n="m4_p">With the technical team that builds the solution. You always deal with me.</p></div>
+      <div class="step reveal"><span class="n">5</span><div class="mk">&#10003;</div><h3 data-i18n="m5_h">I test and validate</h3><p data-i18n="m5_p">From the user&rsquo;s side. If something fails, it&rsquo;s fixed before launch, not after.</p></div>
+      <div class="step reveal"><span class="n">6</span><div class="mk">&#9742;</div><h3 data-i18n="m6_h">I support and follow up</h3><p data-i18n="m6_p">I answer questions, make adjustments, and keep it running over time.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="servicios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-i18n="svc_kicker">Services</span>
+      <h2 class="serif" data-i18n="svc_title">What I offer</h2>
+      <p class="lead" data-i18n="svc_lead">In packages, so you can start with what you need most and move at your own pace. Each one can be hired on its own, though they&rsquo;re designed to work together.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        
+        <div class="top"><div class="mk">&#9636;</div><span class="num">01</span></div>
+        <h3 data-i18n="s1_title">Initial diagnosis</h3>
+        <p class="forwho" data-i18n="s1_for">To find out what state your tools are in today.</p>
+        <p class="d" data-i18n="s1_d">I review the applications, the website and the processes in use, and I identify what works, what fails and what can be improved.</p>
+        <ul><li data-i18n="s1_l1">Review of current tools and processes</li><li data-i18n="s1_l2">Detection of errors and weak points</li><li data-i18n="s1_l3">Clear report with recommendations by priority</li></ul>
+        <p class="benefit-line" data-i18n="s1_b">The best starting point: knowing what you have and what to fix first.</p>
+      </div>
+      <div class="svc reveal">
+        
+        <div class="top"><div class="mk">&#9672;</div><span class="num">02</span></div>
+        <h3 data-i18n="s2_title">Documentation and organization</h3>
+        <p class="forwho" data-i18n="s2_for">So use no longer depends on one person&rsquo;s memory.</p>
+        <p class="d" data-i18n="s2_d">I document, in plain language, how the tools are used and how the processes work.</p>
+        <ul><li data-i18n="s2_l1">Step-by-step user manuals</li><li data-i18n="s2_l2">Guides for the main processes</li><li data-i18n="s2_l3">Written for non-technical people</li></ul>
+        <p class="benefit-line" data-i18n="s2_b">The knowledge becomes available to everyone, not locked in one head.</p>
+      </div>
+      <div class="svc reveal">
+        
+        <div class="top"><div class="mk">&#9881;</div><span class="num">03</span></div>
+        <h3 data-i18n="s3_title">Improvements and automation</h3>
+        <p class="forwho" data-i18n="s3_for">To solve a specific problem or automate a task.</p>
+        <p class="d" data-i18n="s3_d">I turn the need into a clear requirement, coordinate it with the technical team, and confirm it works before it goes live.</p>
+        <ul><li data-i18n="s3_l1">Assessment and definition of the need</li><li data-i18n="s3_l2">Coordination with the development team</li><li data-i18n="s3_l3">Testing and validation of the solution</li></ul>
+        <p class="benefit-line" data-i18n="s3_b">You always deal with me; I handle the technical side behind the scenes.</p>
+      </div>
+      <div class="svc feature reveal">
+        <span class="badge" data-i18n="s4_badge">Main service</span>
+        <div class="top"><div class="mk">&#8635;</div><span class="num">04</span></div>
+        <h3 data-i18n="s4_title">Monthly maintenance and support</h3>
+        <p class="forwho" data-i18n="s4_for">So your tools finally have someone accountable.</p>
+        <p class="d" data-i18n="s4_d">An ongoing service where I take ownership of keeping the applications and website working, under control, and supported when needed.</p>
+        <ul><li data-i18n="s4_l1">Regular functionality checks</li><li data-i18n="s4_l2">Detection and follow-up of errors</li><li data-i18n="s4_l3">Minor adjustments and user support</li><li data-i18n="s4_l4">Documentation updates</li></ul>
+        <p class="benefit-line" data-i18n="s4_b">Someone who responds and takes care of it, month after month, so you don&rsquo;t have to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="pasos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-i18n="next_kicker">Next steps</span>
+      <h2 class="serif" data-i18n="next_title">Getting started is simple</h2>
+      <p class="lead" data-i18n="next_lead">Step by step, with no big commitments.</p>
+    </div>
+    <div class="next-grid">
+      <div class="next reveal"><span class="n">1</span><div class="mk">&#128172;</div><h3 data-i18n="n1_h">A conversation</h3><p data-i18n="n1_p">You tell me what tools you have and what&rsquo;s worrying you. Free, with no commitment.</p></div>
+      <div class="next reveal"><span class="n">2</span><div class="mk">&#9636;</div><h3 data-i18n="n2_h">A diagnosis</h3><p data-i18n="n2_p">I review the situation and deliver a clear report with recommendations by priority.</p></div>
+      <div class="next reveal"><span class="n">3</span><div class="mk">&#8594;</div><h3 data-i18n="n3_h">Deciding where to go next</h3><p data-i18n="n3_p">With the diagnosis on the table, we choose the best path together.</p></div>
+    </div>
+    <p class="next-note reveal" style="color:var(--ink-soft)" data-i18n="next_note">The idea is simple: <b>get a clear picture of the situation first</b>, and only then move forward on what truly adds value.</p>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="wrap reveal">
+    <span class="kicker" data-i18n="contact_kicker">Contact</span>
+    <h2 class="serif" data-i18n="contact_title">Let&rsquo;s talk about your project</h2>
+    <p data-i18n="contact_text">If this fits what you need, message me and we&rsquo;ll set up a first conversation, no commitment.</p>
+    <div class="actions">
+      <a class="btn-gold" href="https://wa.me/5492995523818" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4zM12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2z"/></svg><span data-i18n="contact_btn">WhatsApp +54 9 299 552 3818</span></a>
+      <a class="btn-ghost" href="mailto:ignabeni1@gmail.com" style="display:inline-flex;align-items:center;gap:9px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>ignabeni1@gmail.com</a>
+    </div>
+    <div class="meta">
+      <span data-i18n="contact_meta1">QA Manual Tester &mdash; Application Quality Control</span>
+      <span data-i18n="contact_meta2">External provider &middot; Remote</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span data-i18n="footer"><b>Ignacio Benito</b> &middot; QA and application quality control &middot; Neuqu&eacute;n, Argentina</span></div>
+</footer>
+
+<script>
+  const T = {"en": {"nav_cta": "Contact", "hero_kicker": "QA &middot; Functional Analysis &middot; Maintenance", "hero_title": "Make sure your digital tools<br><em>finally have someone accountable.</em>", "hero_sub": "I review, organize, document and maintain web applications and websites for organizations and institutions. I catch what&rsquo;s broken before your users do, and I take ownership of keeping everything running over time.", "hero_btn_wa": "Message me on WhatsApp", "hero_btn_svc": "See services", "hero_tag1": "External provider", "hero_tag2": "Remote", "hero_tag3": "In QA since 2022", "who_kicker": "Who I am", "who_title": "A functional profile, not just a technical one", "who_lead": "I&rsquo;m a QA Manual Tester and functional analyst. Since 2022 I&rsquo;ve reviewed, documented and validated management platforms for software companies in Spain.", "who_1_h": "I look at tools from the real user&rsquo;s side", "who_1_p": "I spot what doesn&rsquo;t work, where time is lost or where errors slip in, before it reaches the people using it.", "who_2_h": "I know processes from the inside", "who_2_p": "I&rsquo;ve worked on systems for task management, staff and contractor control, accreditations, approvals and tracking. I understand how an organization runs behind the scenes.", "who_3_h": "I document in plain language", "who_3_p": "I put everything in writing so anyone can follow it, with no jargon and no reliance on one person&rsquo;s memory.", "who_4_h": "I handle sensitive information", "who_4_p": "Discretion and order are part of how I approach every project. Trust is protected from day one.", "do_kicker": "What I do", "do_title": "I organize and automate what wastes your time", "do_lead": "<strong>I help organize and automate the processes</strong> that waste time, invite errors, or rely on a single person remembering to do them.", "do_sub": "I don&rsquo;t show up with a finished solution: first I get a clear picture of how things work today, then I propose, test and support. I&rsquo;m the bridge between what the organization needs and the solution that delivers it. You always deal with me.", "do_1_h": "Tools that work", "do_1_p": "with someone accountable when something fails.", "do_2_h": "Clear processes", "do_2_p": "documented and easy for anyone on the team to follow.", "do_3_h": "Less time lost, fewer errors", "do_3_p": "in day-to-day repetitive tasks.", "do_4_h": "A single point of contact", "do_4_p": "for the entire technical side, start to finish.", "prob_kicker": "What I solve", "prob_title": "The problems I help solve", "prob_lead": "Many organizations have applications and a website up and running, but no one making sure they actually work well. Over time, that adds up:", "prob_1_h": "Tools with no oversight or owner", "prob_1_p": "No one knows for certain who manages them or who responds when something fails.", "prob_2_h": "Errors no one catches in time", "prob_2_p": "Found only when a user complains. By then, the damage is done.", "prob_3_h": "No support when a problem comes up", "prob_3_p": "There&rsquo;s no one to turn to, or the answer arrives late and rushed.", "prob_4_h": "Undocumented processes and tools", "prob_4_p": "Using the tool depends on someone remembering how it&rsquo;s done.", "prob_5_h": "Dependence on a single person", "prob_5_p": "All the knowledge lives in one head. The day they&rsquo;re out, the organization is exposed.", "prob_6_h": "Repetitive tasks that eat up time", "prob_6_p": "Manual entries and checks that repeat and could be simplified.", "promise_h": "My job is to take ownership so this stops happening.", "promise_p": "Your tools get an <b>owner</b>, work properly, stay <b>documented</b>, and have <b>support</b> when it&rsquo;s needed.", "exp_kicker": "Experience", "exp_title": "The experience I bring", "exp_lead": "<strong>Since 2022, QA Manual Tester for software companies in Spain.</strong> I review their platforms before they reach the user: I catch errors, confirm that things work, and document how they&rsquo;re used. I&rsquo;ve worked on demanding systems, where a mistake carries real weight.", "exp_1_h": "An eye for what fails", "exp_1_p": "before the end user ever has to deal with it.", "exp_2_h": "A method for documenting", "exp_2_p": "in a way anyone can understand, without jargon.", "exp_3_h": "Judgment with sensitive data", "exp_3_p": "with the discretion each case calls for.", "exp_note": "<b>On top of that:</b> I built and tested my own web application for management. I know the whole journey firsthand, from understanding a need to turning it into a tool that works.", "method_kicker": "Methodology", "method_title": "How I work", "method_lead": "A simple, orderly method, so you always know what we&rsquo;re doing at each stage and why. I don&rsquo;t start proposing solutions before I&rsquo;ve grasped the problem.", "m1_h": "I assess and understand", "m1_p": "What&rsquo;s there today, what state it&rsquo;s in, who uses it and where the problems show up.", "m2_h": "I document", "m2_p": "In plain language: how each thing works and what I found.", "m3_h": "I propose improvements", "m3_p": "Starting with what has the most impact and the least effort.", "m4_h": "I coordinate development", "m4_p": "With the technical team that builds the solution. You always deal with me.", "m5_h": "I test and validate", "m5_p": "From the user&rsquo;s side. If something fails, it&rsquo;s fixed before launch, not after.", "m6_h": "I support and follow up", "m6_p": "I answer questions, make adjustments, and keep it running over time.", "svc_kicker": "Services", "svc_title": "What I offer", "svc_lead": "In packages, so you can start with what you need most and move at your own pace. Each one can be hired on its own, though they&rsquo;re designed to work together.", "s1_title": "Initial diagnosis", "s1_for": "To find out what state your tools are in today.", "s1_d": "I review the applications, the website and the processes in use, and I identify what works, what fails and what can be improved.", "s1_l1": "Review of current tools and processes", "s1_l2": "Detection of errors and weak points", "s1_l3": "Clear report with recommendations by priority", "s1_b": "The best starting point: knowing what you have and what to fix first.", "s2_title": "Documentation and organization", "s2_for": "So use no longer depends on one person&rsquo;s memory.", "s2_d": "I document, in plain language, how the tools are used and how the processes work.", "s2_l1": "Step-by-step user manuals", "s2_l2": "Guides for the main processes", "s2_l3": "Written for non-technical people", "s2_b": "The knowledge becomes available to everyone, not locked in one head.", "s3_title": "Improvements and automation", "s3_for": "To solve a specific problem or automate a task.", "s3_d": "I turn the need into a clear requirement, coordinate it with the technical team, and confirm it works before it goes live.", "s3_l1": "Assessment and definition of the need", "s3_l2": "Coordination with the development team", "s3_l3": "Testing and validation of the solution", "s3_b": "You always deal with me; I handle the technical side behind the scenes.", "s4_badge": "Main service", "s4_title": "Monthly maintenance and support", "s4_for": "So your tools finally have someone accountable.", "s4_d": "An ongoing service where I take ownership of keeping the applications and website working, under control, and supported when needed.", "s4_l1": "Regular functionality checks", "s4_l2": "Detection and follow-up of errors", "s4_l3": "Minor adjustments and user support", "s4_l4": "Documentation updates", "s4_b": "Someone who responds and takes care of it, month after month, so you don&rsquo;t have to.", "next_kicker": "Next steps", "next_title": "Getting started is simple", "next_lead": "Step by step, with no big commitments.", "n1_h": "A conversation", "n1_p": "You tell me what tools you have and what&rsquo;s worrying you. Free, with no commitment.", "n2_h": "A diagnosis", "n2_p": "I review the situation and deliver a clear report with recommendations by priority.", "n3_h": "Deciding where to go next", "n3_p": "With the diagnosis on the table, we choose the best path together.", "next_note": "The idea is simple: <b>get a clear picture of the situation first</b>, and only then move forward on what truly adds value.", "contact_kicker": "Contact", "contact_title": "Let&rsquo;s talk about your project", "contact_text": "If this fits what you need, message me and we&rsquo;ll set up a first conversation, no commitment.", "contact_btn": "WhatsApp +54 9 299 552 3818", "contact_meta1": "QA Manual Tester &mdash; Application Quality Control", "contact_meta2": "External provider &middot; Remote", "footer": "<b>Ignacio Benito</b> &middot; QA and application quality control &middot; Neuqu&eacute;n, Argentina"}, "es": {"nav_cta": "Contacto", "hero_kicker": "QA &middot; An&aacute;lisis funcional &middot; Mantenimiento", "hero_title": "Que tus herramientas digitales tengan,<br><em>por fin, un responsable.</em>", "hero_sub": "Reviso, ordeno, documento y mantengo aplicaciones y sitios web para organizaciones e instituciones. Detecto lo que falla antes de que lo sufra el usuario, y me hago cargo de que siga funcionando con el tiempo.", "hero_btn_wa": "Escribime por WhatsApp", "hero_btn_svc": "Ver servicios", "hero_tag1": "Servicio externo", "hero_tag2": "Modalidad remota", "hero_tag3": "Desde 2022 en QA", "who_kicker": "Qui&eacute;n soy", "who_title": "Un perfil funcional, no solo t&eacute;cnico", "who_lead": "Soy QA Manual Tester y analista funcional. Desde 2022 reviso, documento y valido plataformas de gesti&oacute;n para empresas desarrolladoras de software en Espa&ntilde;a.", "who_1_h": "Miro desde el usuario real", "who_1_p": "Detecto d&oacute;nde algo no funciona, d&oacute;nde se pierde tiempo o d&oacute;nde se presta a errores, antes de que llegue a quien la usa.", "who_2_h": "Conozco los procesos por dentro", "who_2_p": "Trabaj&eacute; sobre sistemas de tareas, control de personal, acreditaciones, aprobaciones y seguimiento. S&eacute; c&oacute;mo funciona una organizaci&oacute;n puertas adentro.", "who_3_h": "Documento en lenguaje claro", "who_3_p": "Dejo todo por escrito de forma que cualquiera entienda, sin tecnicismos y sin depender de que una sola persona se acuerde.", "who_4_h": "Manejo informaci&oacute;n sensible", "who_4_p": "La discreci&oacute;n y el orden son parte de c&oacute;mo encaro cada proyecto. La confianza se cuida desde el primer d&iacute;a.", "do_kicker": "Qu&eacute; hago", "do_title": "Ordeno y automatizo lo que hace perder tiempo", "do_lead": "<strong>Ayudo a ordenar y automatizar los procesos</strong> que hacen perder tiempo, se prestan a errores o dependen de que una sola persona se acuerde de hacerlos.", "do_sub": "No llego con una soluci&oacute;n cerrada: primero entiendo c&oacute;mo funciona hoy, despu&eacute;s propongo, pruebo y acompa&ntilde;o. Soy el puente entre lo que la organizaci&oacute;n necesita y la soluci&oacute;n que lo resuelve. Vos trat&aacute;s siempre conmigo.", "do_1_h": "Herramientas que funcionan", "do_1_p": "y tienen quien responda por ellas cuando algo falla.", "do_2_h": "Procesos claros", "do_2_p": "documentados y f&aacute;ciles de seguir por cualquiera del equipo.", "do_3_h": "Menos tiempo y menos errores", "do_3_p": "en las tareas repetitivas del d&iacute;a a d&iacute;a.", "do_4_h": "Un solo interlocutor", "do_4_p": "para toda la parte t&eacute;cnica, sin vueltas ni intermediarios.", "prob_kicker": "Qu&eacute; resuelvo", "prob_title": "Qu&eacute; problemas ayudo a resolver", "prob_lead": "Muchas organizaciones tienen aplicaciones y una web funcionando, pero sin nadie que se ocupe de que funcionen bien. Con el tiempo, eso se acumula:", "prob_1_h": "Herramientas sin control ni responsable", "prob_1_p": "Nadie sabe con certeza qui&eacute;n las gestiona ni qui&eacute;n responde cuando algo falla.", "prob_2_h": "Errores que nadie detecta a tiempo", "prob_2_p": "Se descubren reci&eacute;n cuando un usuario se queja. Para entonces, ya generaron molestia.", "prob_3_h": "Falta de soporte cuando surge un problema", "prob_3_p": "No hay a qui&eacute;n recurrir, o la respuesta llega tarde y a las apuradas.", "prob_4_h": "Procesos y herramientas sin documentar", "prob_4_p": "Usar la herramienta depende de que alguien se acuerde de c&oacute;mo se hace.", "prob_5_h": "Dependencia de una sola persona", "prob_5_p": "Todo el conocimiento vive en una sola cabeza. El d&iacute;a que no est&aacute;, la organizaci&oacute;n queda expuesta.", "prob_6_h": "Tareas repetitivas que consumen tiempo", "prob_6_p": "Cargas y controles manuales que se repiten y que podr&iacute;an simplificarse.", "promise_h": "Mi trabajo es hacerme cargo de que esto deje de pasar.", "promise_p": "Que las herramientas tengan un <b>responsable</b>, funcionen bien, est&eacute;n <b>documentadas</b> y cuenten con <b>soporte</b> cuando se necesita.", "exp_kicker": "Experiencia", "exp_title": "Qu&eacute; experiencia tengo", "exp_lead": "<strong>Desde 2022, QA Manual Tester para empresas desarrolladoras de software en Espa&ntilde;a.</strong> Reviso sus plataformas antes de que lleguen al usuario: detecto errores, valido que funcionen y documento c&oacute;mo se usan. Trabaj&eacute; sobre sistemas exigentes, donde un error no es un detalle.", "exp_1_h": "Ojo para detectar", "exp_1_p": "Lo que falla antes de que lo sufra el usuario final.", "exp_2_h": "M&eacute;todo para documentar", "exp_2_p": "De forma que cualquiera entienda, sin tecnicismos.", "exp_3_h": "Criterio con info sensible", "exp_3_p": "Con la discreci&oacute;n que corresponde en cada caso.", "exp_note": "<b>Adem&aacute;s:</b> desarroll&eacute; y prob&eacute; una aplicaci&oacute;n web de gesti&oacute;n propia. Conozco de primera mano todo el recorrido, desde entender una necesidad hasta convertirla en una herramienta que funciona.", "method_kicker": "Metodolog&iacute;a", "method_title": "C&oacute;mo trabajo", "method_lead": "Un m&eacute;todo simple y ordenado, para que en cada etapa sepas qu&eacute; estamos haciendo y por qu&eacute;. No arranco proponiendo soluciones sin entender antes el problema.", "m1_h": "Relevo y entiendo", "m1_p": "Conozco qu&eacute; hay hoy, en qu&eacute; estado est&aacute;, qui&eacute;n lo usa y d&oacute;nde aparecen los problemas.", "m2_h": "Documento", "m2_p": "Dejo por escrito, en lenguaje claro, c&oacute;mo funciona cada cosa y qu&eacute; se detect&oacute;.", "m3_h": "Propongo mejoras", "m3_p": "Empezando por lo que m&aacute;s impacto tiene y menos esfuerzo requiere.", "m4_h": "Coordino el desarrollo", "m4_p": "Con el equipo t&eacute;cnico que construye la soluci&oacute;n. Vos trat&aacute;s siempre conmigo.", "m5_h": "Pruebo y valido", "m5_p": "Desde el lugar del usuario. Si algo falla, se corrige antes, no despu&eacute;s.", "m6_h": "Acompa&ntilde;o y doy soporte", "m6_p": "Resuelvo dudas, hago ajustes y me ocupo de que siga funcionando con el tiempo.", "svc_kicker": "Servicios", "svc_title": "Qu&eacute; servicios ofrezco", "svc_lead": "En paquetes, para empezar por lo que m&aacute;s se necesita y avanzar a tu ritmo. Cada uno se puede contratar por separado, aunque est&aacute;n pensados para complementarse.", "s1_title": "Diagn&oacute;stico inicial", "s1_for": "Para saber en qu&eacute; estado est&aacute;n hoy sus herramientas.", "s1_d": "Reviso las aplicaciones, la web y los procesos en uso, y detecto qu&eacute; funciona, qu&eacute; falla y qu&eacute; se puede mejorar.", "s1_l1": "Revisi&oacute;n de herramientas y procesos actuales", "s1_l2": "Detecci&oacute;n de errores y puntos d&eacute;biles", "s1_l3": "Informe claro con recomendaciones por prioridad", "s1_b": "El mejor punto de partida: saber qu&eacute; ten&eacute;s y qu&eacute; conviene resolver primero.", "s2_title": "Documentaci&oacute;n y ordenamiento", "s2_for": "Para que el uso deje de depender de la memoria de una persona.", "s2_d": "Dejo documentado, en lenguaje claro, c&oacute;mo se usan las herramientas y c&oacute;mo funcionan los procesos.", "s2_l1": "Manuales de uso paso a paso", "s2_l2": "Gu&iacute;as de los procesos principales", "s2_l3": "Pensada para personas no t&eacute;cnicas", "s2_b": "El conocimiento queda disponible para todos, no en una sola cabeza.", "s3_title": "Mejoras y automatizaci&oacute;n", "s3_for": "Para resolver un problema concreto o automatizar una tarea.", "s3_d": "Transformo la necesidad en un requerimiento claro, lo coordino con el equipo t&eacute;cnico y valido que funcione antes de usarlo.", "s3_l1": "Relevamiento y definici&oacute;n de la necesidad", "s3_l2": "Coordinaci&oacute;n con el equipo de desarrollo", "s3_l3": "Pruebas y validaci&oacute;n de la soluci&oacute;n", "s3_b": "Vos trat&aacute;s siempre conmigo; yo me encargo de la parte t&eacute;cnica por detr&aacute;s.", "s4_badge": "Servicio principal", "s4_title": "Mantenimiento y soporte mensual", "s4_for": "Para que sus herramientas tengan, por fin, un responsable.", "s4_d": "Un servicio continuo donde me hago cargo de que las aplicaciones y la web funcionen, est&eacute;n controladas y tengan soporte cuando se necesita.", "s4_l1": "Revisi&oacute;n peri&oacute;dica del funcionamiento", "s4_l2": "Detecci&oacute;n y seguimiento de errores", "s4_l3": "Ajustes menores y soporte a usuarios", "s4_l4": "Actualizaci&oacute;n de la documentaci&oacute;n", "s4_b": "Alguien que responde y se ocupa, mes a mes, sin que tengan que estar encima.", "next_kicker": "Pr&oacute;ximos pasos", "next_title": "Empezar es simple", "next_lead": "De a poco y sin grandes compromisos.", "n1_h": "Una charla", "n1_p": "Me cont&aacute;s qu&eacute; herramientas tienen y qu&eacute; les preocupa. Sin costo y sin compromiso.", "n2_h": "Un diagn&oacute;stico", "n2_p": "Reviso el estado y entrego un informe claro con recomendaciones por prioridad.", "n3_h": "Definir por d&oacute;nde seguir", "n3_p": "Con el diagn&oacute;stico sobre la mesa, elegimos juntos el mejor camino.", "next_note": "La idea es simple: <b>primero entender bien la situaci&oacute;n</b>, y reci&eacute;n despu&eacute;s avanzar sobre lo que realmente aporte valor.", "contact_kicker": "Contacto", "contact_title": "Hablemos de tu proyecto", "contact_text": "Si lo que le&iacute;ste tiene sentido para lo que est&aacute;s necesitando, escribime y coordinamos una primera charla, sin compromiso.", "contact_btn": "WhatsApp +54 9 299 552 3818", "contact_meta1": "QA Manual Tester &mdash; Control de calidad de aplicaciones", "contact_meta2": "Servicio externo &middot; Modalidad remota", "footer": "<b>Ignacio Benito</b> &middot; QA y control de calidad de aplicaciones &middot; Neuqu&eacute;n, Argentina"}};
+  const TITLES = {en:"Ignacio Benito \u2014 QA and application quality control", es:"Ignacio Benito \u2014 QA y control de calidad de aplicaciones"};
+  function setLang(l){
+    document.documentElement.lang = l;
+    document.title = TITLES[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (T[l] && T[l][k] !== undefined) el.innerHTML = T[l][k];
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+  }
+  // Start in English as requested
+  setLang('en');
+
+  // nav background on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 40); };
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // reveal on scroll
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
